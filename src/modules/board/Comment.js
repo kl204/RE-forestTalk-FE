@@ -23,37 +23,52 @@ const Comment = (props) => {
 	console.log("comment js 넘어와서!! : " + bSeq);
 
 	// fetch로 bSeq를 써서 그 게시물 번호에 따른 댓글리스트 가져오기
-	  useEffect(() => {
+	useEffect(() => {
 		fetch(`${PORT}/commentBoard/selectBoardComment?bSeq=${bSeq}`, {
-		  method: "get",
+			method: "get",
 		})
-		  .then((res) => res.json())  // 데이터를 텍스트로 추출
-		  .then((data) => {
-			const boardData = data.data;  // 데이터를 상태에 설정, 첫번째 data는 response의 data, 두번째 data는 Spring ApiResult 클래스의 List 이름이 data
-	
-			console.log("댓글 리스트 " + boardData[0].ccontents);
-	
-			const updatedDataSec = boardData.map((boardItem, index) => {
+			.then((res) => {
+				if (!res.ok) {
+					throw new Error("서버에서 데이터를 가져오는데 문제가 발생했습니다.");
+				}
+				return res.json();
+			}
+			)  // 데이터를 텍스트로 추출
+			.then((data) => {
 
-				return {
-				  key: index,
-				  cSeq: boardItem.cseq,
-				  bSeq: boardItem.bseq,
-				  uSeq: boardItem.useq,
-				  cContents: boardItem.ccontents,
-				  cdt: boardItem.cdt  ,
-				};
-	  
-	  
-			  });
+				console.log(data);
 
-			setCommentDataSec(updatedDataSec);
-      setRegistSuccess(0);
+				if (data.data != null) {
+					const boardData = data.data;  // 데이터를 상태에 설정, 첫번째 data는 response의 data, 두번째 data는 Spring ApiResult 클래스의 List 이름이 data
 
-		  });
+					console.log("댓글 리스트 " + boardData[0].ccontents);
+
+					const updatedDataSec = boardData.map((boardItem, index) => {
+
+						return {
+							key: index,
+							cSeq: boardItem.cseq,
+							bSeq: boardItem.bseq,
+							uSeq: boardItem.useq,
+							cContents: boardItem.ccontents,
+							cdt: boardItem.cdt,
+						};
 
 
-	  }, [registSuccess]);
+					});
+
+					setCommentDataSec(updatedDataSec);
+					setRegistSuccess(0);
+
+				}else{
+
+					console.log("댓글이 존재하지 않습니다");
+				}
+
+			});
+
+
+	}, [registSuccess]);
 
     console.log("전체 길이"+commentDataSec.length);
 
