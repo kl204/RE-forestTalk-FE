@@ -1,0 +1,29 @@
+/* 
+   0817 박은빈 파일 상세페이지 css
+*/
+
+.file-board-detail-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+  
+  .left-info {
+    flex: 1;
+  }
+  
+  .right-info {
+    text-align: right;
+  }
+
+  .author {
+    margin-bottom: 8px; /* 작성자 정보와 제목 사이의 간격 조정 */
+    font-weight: bold; /* 작성자 정보에 더 강조된 스타일 적용 */
+  }

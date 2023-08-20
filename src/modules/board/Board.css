@@ -1,0 +1,26 @@
+/* 
+   0816 김선규 UserBoard css
+*/
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* 리스트 스타일 css */
+.liStyles {
+  display: flex;
+  justify-content: center;
+}
+
+/* 검색 버튼 css */
+.suffix {
+  width: 304;
+}
+
+/* 글 작성 버튼 */
+.registButton {
+  display: flex;
+  margin: 5px;
+  justify-content: right;
+}
